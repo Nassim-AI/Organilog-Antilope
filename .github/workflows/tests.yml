@@ -145,7 +145,7 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_NAME: interventions
           DB_USER: interventions_user
-          DB_PASSWORD: interventions_password
+          DB_PASS: interventions_password
 
       - name: Start frontend server
         run: |
