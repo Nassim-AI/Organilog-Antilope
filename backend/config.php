@@ -5,7 +5,7 @@ class Database {
     private $connection;
     
     private function __construct() {
-        $host = $_ENV['DB_HOST'] ?? 'mariadb';
+        $host = $_ENV['DB_HOST'] ?? '127.0.0.1';
         $dbname = $_ENV['DB_NAME'] ?? 'interventions_db';
         $username = $_ENV['DB_USER'] ?? 'app_user';
         $password = $_ENV['DB_PASS'] ?? 'app_pass';
