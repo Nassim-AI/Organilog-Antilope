@@ -40,7 +40,7 @@ jobs:
       - name: Setup test database
         run: |
           cd backend
-          mysql -h 127.0.0.1 -u test_user -ptest_password test_interventions < database/init.sql || true
+          mysql -h 127.0.0.1 -u test_user -ptest_password test_interventions < ../database/init.sql || true
 
       - name: Run PHPUnit tests
         run: |
@@ -134,7 +134,7 @@ jobs:
       - name: Setup E2E database
         run: |
           cd backend
-          mysql -h 127.0.0.1 -u interventions_user -pinterventions_password interventions < database/init.sql || true
+          mysql -h 127.0.0.1 -u interventions_user -pinterventions_password interventions < ../database/init.sql || true
 
       - name: Start PHP server
         run: |
