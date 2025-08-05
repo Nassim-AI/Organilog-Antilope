@@ -50,7 +50,7 @@ jobs:
           DB_HOST: 127.0.0.1
           DB_NAME: test_interventions
           DB_USER: test_user
-          DB_PASSWORD: test_password
+          DB_PASS: test_password
 
   # Tests React avec Jest
   react-tests:
