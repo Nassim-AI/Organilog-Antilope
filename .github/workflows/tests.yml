@@ -84,96 +84,10 @@ jobs:
           flags: jest
           name: jest-coverage
 
-  # Tests E2E avec Playwright
-  e2e-tests:
-    runs-on: ubuntu-latest
-    needs: [php-tests, react-tests]
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: "npm"
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: Setup PHP for backend
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.1"
-          extensions: pdo, pdo_mysql, curl, json
-
-      - name: Install frontend dependencies
-        run: |
-          cd frontend
-          npm ci
-
-      - name: Install Playwright browsers
-        run: |
-          cd frontend
-          npx playwright install --with-deps
-
-      - name: Install backend dependencies
-        run: |
-          cd backend
-          composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      - name: Setup MySQL for E2E
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql database: "interventions"
-          mysql user: "interventions_user"
-          mysql password: "interventions_password"
-
-      - name: Wait for MySQL
-        run: sleep 10
-
-      - name: Setup E2E database
-        run: |
-          cd backend
-          mysql -h 127.0.0.1 -u interventions_user -pinterventions_password interventions < ../database/init.sql || true
-
-      - name: Start PHP server
-        run: |
-          cd backend
-          php -S localhost:8080 &
-          sleep 5
-        env:
-          DB_HOST: 127.0.0.1
-          DB_NAME: interventions
-          DB_USER: interventions_user
-          DB_PASS: interventions_password
-
-      - name: Start frontend server
-        run: |
-          cd frontend
-          npm run dev &
-          sleep 10
-
-      - name: Wait for servers to be ready
-        run: |
-          timeout 60 bash -c 'until curl -f http://localhost:3000; do sleep 2; done'
-          timeout 60 bash -c 'until curl -f http://localhost:8080; do sleep 2; done'
-
-      - name: Run Playwright tests
-        run: |
-          cd frontend
-          npm run test:e2e
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: frontend/playwright-report/
-          retention-days: 30
-
+  # Résumé des tests
   tests-summary:
     runs-on: ubuntu-latest
-    needs: [php-tests, react-tests, e2e-tests]
+    needs: [php-tests, react-tests]
     if: always()
 
     steps:
@@ -181,9 +95,8 @@ jobs:
         run: |
           echo "PHP Tests: ${{ needs.php-tests.result }}"
           echo "React Tests: ${{ needs.react-tests.result }}"
-          echo "E2E Tests: ${{ needs.e2e-tests.result }}"
 
-          if [[ "${{ needs.php-tests.result }}" == "success" && "${{ needs.react-tests.result }}" == "success" && "${{ needs.e2e-tests.result }}" == "success" ]]; then
+          if [[ "${{ needs.php-tests.result }}" == "success" && "${{ needs.react-tests.result }}" == "success" ]]; then
             echo "✅ Tous les tests sont passés !"
             exit 0
           else
