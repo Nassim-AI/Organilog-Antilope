@@ -1,10 +1,25 @@
 <?php
 // backend/config.php
+
+// 👇 Charger manuellement les variables d’environnement depuis .env.test si présent (utile en local ou fallback)
+$envFile = __DIR__ . '/.env.test';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue; // ignorer les commentaires
+        if (strpos($line, '=') !== false) {
+            list($key, $value) = explode('=', $line, 2);
+            $_ENV[trim($key)] = trim($value);
+        }
+    }
+}
+
 class Database {
     private static $instance = null;
     private $connection;
     
     private function __construct() {
+        // 👇 Récupération des variables d’environnement (définies par GitHub Actions ou .env.test)
         $host = $_ENV['DB_HOST'] ?? '127.0.0.1';
         $dbname = $_ENV['DB_NAME'] ?? 'interventions_db';
         $username = $_ENV['DB_USER'] ?? 'app_user';
