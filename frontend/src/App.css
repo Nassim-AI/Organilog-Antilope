@@ -1,0 +1,325 @@
+/* frontend/src/App.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: #f8f9fa;
+}
+
+.App {
+  min-height: 100vh;
+}
+
+/* Header style Organilog */
+.header {
+  background: linear-gradient(90deg, #2c5aa0 0%, #1e3d72 100%);
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-bar input {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.search-bar button {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Layout principal */
+.main-container {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+.sidebar {
+  width: 200px;
+  background: #34495e;
+  padding: 20px 0;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar button {
+  background: none;
+  border: none;
+  color: #bdc3c7;
+  padding: 12px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar button:hover {
+  background: rgba(255,255,255,0.05);
+  color: white;
+}
+
+.sidebar button.active {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border-left: 3px solid #3498db;
+}
+
+/* Contenu principal */
+.content {
+  flex: 1;
+  padding: 20px;
+  background: white;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ecf0f1;
+}
+
+.section-header h2 {
+  color: #2c3e50;
+  font-size: 24px;
+}
+
+.btn-primary {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background: #2980b9;
+}
+
+/* Formulaires */
+.form-card {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+.form-card input {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-card button {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form-card button:hover {
+  background: #229954;
+}
+
+/* Filtres style Organilog */
+.filters-organi {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.filters-organi button {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.filters-organi button:hover {
+  color: #2c3e50;
+  background: #f4f5f6;
+}
+
+.filters-organi button.active {
+  color: #3498db;
+  border-bottom: 3px solid #3498db;
+  background: #f8f9fa;
+}
+
+/* Table style Organilog */
+.table-container {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.organilog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.organilog-table thead {
+  background: #34495e;
+  color: white;
+}
+
+.organilog-table th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.organilog-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ecf0f1;
+  vertical-align: middle;
+}
+
+.organilog-table tbody tr:hover {
+  background: #f4f5f6;
+}
+
+.organilog-table tbody tr:nth-child(even) {
+  background: #fafbfc;
+}
+
+.organilog-table tbody tr:nth-child(even):hover {
+  background: #f0f1f4;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-select {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Boutons d'action */
+.btn-status, .btn-delete {
+  background: none;
+  border: none;
+  padding: 6px;
+  margin: 0 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+/* Hover spécifique pour le SVG flèche (orange) */
+.btn-status:hover svg[viewBox="0 0 18 18"] {
+  color: #ff8c00;
+}
+
+/* Hover pour le check (vert plus doux) */
+.btn-status:hover svg[viewBox="0 0 48 48"] {
+  color: #2ecc71;
+}
+
+.btn-status:hover {
+  background: rgba(46, 204, 113, 0.1);
+}
+
+.btn-delete:hover {
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.btn-delete:hover svg {
+  color: #e74c3c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+  }
+  
+  .sidebar nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  
+  .form-card {
+    flex-direction: column;
+  }
+  
+  .form-card input {
+    min-width: 100%;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .filters-organi {
+    flex-wrap: wrap;
+  }
+}

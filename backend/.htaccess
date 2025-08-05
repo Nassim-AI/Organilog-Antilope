@@ -1,0 +1,11 @@
+# backend/.htaccess
+RewriteEngine On
+
+# Route pour devis
+RewriteRule ^devis/?$ index.php [QSA,L]
+RewriteRule ^devis/([0-9]+)/?$ index.php [QSA,L]
+
+# Route pour interventions (par défaut)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
